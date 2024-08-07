@@ -12,7 +12,7 @@ jobs:
       - name: Build Docker image
         run: |
           echo "Building Docker image..."
-          docker build -t sammreen .
+          docker build -t zeeshan .
 
   deploy:
     runs-on: self-hosted
@@ -21,9 +21,9 @@ jobs:
       - name: Deploy Docker container
         run: |
           echo "Deploying Docker container..."
-          docker stop sammreen || true
-          docker rm sammreen || true
-          docker run -d --name sammreen -p 81:81 sammreen
+          docker stop zeeshan || true
+          docker rm zeeshan || true
+          docker run -d --name zeeshan -p 81:81 zeeshan
 
   test:
     runs-on: self-hosted
@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "Testing if the server is up..."
           sleep 180
-          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://103.172.26.37:81)
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://103.151.111.186:81)
           if [ "$STATUS_CODE" -eq 200 ]; then
           echo "Server is up and running."
           else
